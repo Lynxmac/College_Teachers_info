@@ -7,10 +7,19 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 # Create your models here.
 
+def upload_location(instance, filename):
+    return "%s/%s" %(instance.id, filename)
 
 class Teacher(models.Model):
     name = models.CharField(verbose_name = '姓名' ,max_length=30,default='')
     slug = models.SlugField(verbose_name = "链接别名",unique=True)  
+    image = models.ImageField(verbose_name = "头像",upload_to=upload_location,
+            null=True,
+            blank=True,
+            width_field="width_field",
+            height_field="height_field")
+    height_field = models.IntegerField(verbose_name = "高度",default=0)
+    width_field = models.IntegerField(verbose_name = "宽度",default=0)
     sex_choice = (("Male","男"),("Female","女"))
     sex = models.CharField(verbose_name = "性别",max_length=4,choices=sex_choice,default='Male')
     professional_title = models.CharField(verbose_name = "职称",max_length=120,default = '大学教师')
@@ -41,7 +50,10 @@ class Teacher(models.Model):
         return self.name
     
     def get_views_url(self):
-	return reverse("Teachers:detail",kwargs={"id":self.id})
+	return reverse("Teachers:detail",kwargs={"slug":self.slug})
+
+    class Meta:
+        ordering = ["-timestamp", "-updated"]
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)

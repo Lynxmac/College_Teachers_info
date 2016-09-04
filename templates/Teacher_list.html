@@ -1,13 +1,16 @@
 <!--DOCTYPE html -->
-
+{% load staticfiles %}
 <html>
+<head>
+<link rel='stylesheet' href='{% static "css/base.css" %}' />
+</head>
 <body>
 <h1>Teacher_list()函数调用了这张模板</h1>
 
 {% for obj in object_list %}
 
 <a href = "{{obj.get_views_url}}">{{obj.name}}</a></br>
-<a href = "{% url "Teachers:detail" id=obj.id %}">{{obj.name}}</a>
+<a href = "{% url "Teachers:detail" slug=obj.slug %}">{{obj.name}}</a>
 {%endfor%}
 </body>
 </html>

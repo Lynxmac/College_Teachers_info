@@ -1,19 +1,35 @@
-<!--DOCTYPE html -->
+{% extends "base.html" %}
 
-<html>
-<body>
-<h1>Teacher_detail()函数调用了这张模板</h1>
+{%block head_title%}{{instance.name}} | 教师主页{%endblock head_title%}
 
-<h1><a>教师简介：</a></h1><hr/>
-	<p>ID：{{instance.id}}</p>
+{%block style%}
+.col-center-block {  
+    float: none;  
+    display: block;  
+    margin-left: auto;  
+    margin-right: auto;  
+}  
+{%endblock style%}
+
+{% block content %}
+{% if instance.image %}
+         <img src='{{ instance.image.url }}' class='img-responsive center-block' />
+        {% endif %}
+<h1>{{instance.name}}</h1>
+    
+<div class = 'row'>
+    <div class = 'col-sm-6'>
 	<p>学校：{{instance.college}}</p>
 	<p>学院：{{instance.academy}}</p>
 	<p>院系：{{instance.institution}}</p>
 	<p>职称：{{instance.professional_title}}</p>
+    </div>
+    <div class = 'col-sm-6'>
         <p>地址：{{instance.address}}</p>
         <p>邮编：{{instance.post_number}}</p>
         <p>邮箱：{{instance.mail}}</p>
         <p>电话：{{instance.phone_number}}</p>
-
-</body>
-</html>
+    </div>
+</div>
+<hr/>
+{%endblock content%}
