@@ -6,8 +6,8 @@
 
 {% for obj in object_list %}
 
-{{obj.name}}</br>
-
+<a href = "{{obj.get_views_url}}">{{obj.name}}</a></br>
+<a href = "{% url "Teachers:detail" id=obj.id %}">{{obj.name}}</a>
 {%endfor%}
 </body>
 </html>

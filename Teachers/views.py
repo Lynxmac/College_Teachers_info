@@ -18,10 +18,10 @@ def Teacher_list(request):
 
 
 def Teacher_detail(request, slug=None):
-	instance = get_object_or_404(Teacher, id=1)
-	#share_string = quote_plus(instance.content)
-	context = {
+    instance = get_object_or_404(Teacher,slug=slug)
+    #share_string = quote_plus(instance.content)
+    context = {
 		"name": instance.name,
 		"instance": instance,
-	}
-	return render(request, "Teacher_detail.html", context)
+    }
+    return render(request, "Teacher_detail.html", context)
