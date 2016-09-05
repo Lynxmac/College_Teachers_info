@@ -3,8 +3,9 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import Teacher
 from django.utils import timezone
+from django.db.models import Q
 from django.contrib import messages
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import PostForm
 
 from django.http import HttpResponseRedirect, Http404 
@@ -36,8 +37,30 @@ def Teacher_list(request):
     today = timezone.now().date()
     #queryset_list = Teacher.objects.active() #.order_by("-timestamp")
     queryset_list = Teacher.objects.all()
+    query = request.GET.get("q")
+    if query:
+	queryset_list = queryset_list.filter(
+		Q(name__icontains=query)|
+		Q(content__icontains=query)|
+		Q(college__icontains=query) |
+		Q(academy__icontains=query) 
+		).distinct()
+    paginator = Paginator(queryset_list, 6) # 每页显示6个结果
+    page_request_var = "page"
+    page = request.GET.get(page_request_var)
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # 如果请求页数不是一个整数，则直接返回第一页
+        queryset = paginator.page(1)
+    except EmptyPage:
+        # 如果请求页数超出list的最大索引则返回最后一页
+        queryset = paginator.page(paginator.num_pages)
     context = {
-		"object_list": queryset_list, 
+		"object_list": queryset,
+		"title": "教师列表",
+		"result":"搜索结果",
+		"page_request_var": page_request_var, 
 		"today": today,
 	}
     return render(request, "Teacher_list.html", context)

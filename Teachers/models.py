@@ -21,7 +21,7 @@ class Teacher(models.Model):
     height_field = models.IntegerField(verbose_name = "高度",default=0)
     width_field = models.IntegerField(verbose_name = "宽度",default=0)
     sex_choice = (("Male","男"),("Female","女"))
-    sex = models.CharField(verbose_name = "性别",max_length=4,choices=sex_choice,default='Male')
+    sex = models.CharField(verbose_name = "性别",max_length=10,choices=sex_choice,default='Male')
     professional_title = models.CharField(verbose_name = "职称",max_length=120,default = '大学教师')
     address = models.CharField(verbose_name = "地址",max_length=120,default = '')
     college = models.CharField(verbose_name = "所在大学",max_length=30,default = '')

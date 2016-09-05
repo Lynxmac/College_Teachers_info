@@ -12,11 +12,28 @@
 {%endblock style%}
 
 {% block content %}
-{% if instance.image %}
-         <img src='{{ instance.image.url }}' class='img-responsive center-block' />
-        {% endif %}
-<h1>{{instance.name}}</h1>
+
+<style>  
+.col-center-block {  
+    float: none;  
+    display: block;  
+    margin-left: auto;  
+    margin-right: auto;  
+}  
+</style>
+
+{% include "detail_nav_bar.html" %}
+<div class='col-sm-6 col-center-block'style="margin:0px auto auto auto">
+    <div class="col-sm-6 col-center-block">
+      <div class = 'thumbnail'>
+       {% if instance.image %}
+       <img src='{{ instance.image.url }}'/>
+       {% endif %}
+       <h1 align = 'center' >{{ instance.name }}</h1><br/>
+    </div>
+     </div>
     
+<h1><a name = "intrudution">教师简介：</a></h1><hr/>
 <div class = 'row'>
     <div class = 'col-sm-6'>
 	<p>学校：{{instance.college}}</p>
@@ -32,4 +49,69 @@
     </div>
 </div>
 <hr/>
+<div class='row'>
+<div class='col-sm-12'>
+
+{{ instance.content|linebreaks }}
+
+<hr/>
+<br/>
+<h1><a name = "teaching">教学工作：</a></h1><hr/>
+        {% if instance.UG_lesson%}
+	<h3>本科生教程：</h3>
+        <p>{{instance.UG_lesson|linebreaks}}</p>
+        {%endif%}
+      	{% if instance.PG_lesson%}
+        <h3>本科生教程：</h3>
+        <p>{{instance.PG_lesson|linebreaks}}</p>
+        {%endif%}
+        <hr/>
+
+<h1><a name = "research">科研工作：</a></h1><hr/>
+	{% if instance.research_direction%}
+        	<h3>研究方向：</h3>
+        	<p>{{instance.research_direction|linebreaks}}</p>
+        {%endif%}
+        {% if instance.research%}
+        <h3>研究工作：</h3>
+        <p>{{instance.research|linebreaks}}</p>
+        {%endif%}
+	{% if instance.hold_project%}
+        <h3>主持项目：</h3>
+        <p>{{instance.hold_project|linebreaks}}</p>
+        {%endif%}
+<hr/>
+<h1><a name = "papers">发表论文：</a></h1><hr/>
+	{% if instance.papers%}
+                <h3>期刊论文：</h3>
+                <p>{{instance.papers|linebreaks}}</p>
+        {%endif%}
+        {% if instance.books%}
+        <h3>书籍著作：</h3>
+        <p>{{instance.books|linebreaks}}</p>
+        {%endif%}
+        {% if instance.conference_papers%}
+        <h3>会议论文：</h3>
+        <p>{{instance.conference_papers|linebreaks}}</p>
+        {%endif%}
+<hr/>
+<h1><a name = "recruitment">招聘博士后：</a></h1><hr/>
+        {% if instance.recruitment%}
+        <p>{{instance.recruitment|linebreaks}}</p>
+        {%endif%}
+
+<hr/>
+
+{% if  request.user.is_superuser  %}
+
+<a href="/Teachers/create"><button class="btn btn-primary btn-mini" type="button">添加教师</button></a>
+<a href="{{instance.get_views_url}}edit"><button class="btn btn-success btn-mini" type="button">修改教师</button></a>
+<a href="{{instance.get_views_url}}delete"><button class="btn btn-danger btn-mini" type="button">删除教师</button></a>
+<hr/>
+{% endif %}
+
+</div>
+</div>
+</div>
+
 {%endblock content%}
