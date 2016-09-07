@@ -106,3 +106,5 @@ def Teacher_delete(request, slug=None):
 	messages.success(request, u"删除%s成功"%name)
 	return redirect("Teachers:list")
 	
+def List_with_api(request):
+    return render(request,'Teacher_list_with_api.html')

@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Teachers'
+    'Teachers',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -129,5 +130,5 @@ STATIC_URL = '/static/'
 
 
 MEDIA_URL = "/media_cdn/"
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "mysite/media_cdn")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "College_Teachers_info/media_cdn")
 

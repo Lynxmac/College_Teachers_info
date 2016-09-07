@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+{%include 'list_nav_bar.html'%}
+{% verbatim %}
+<div ng-app="myApp" ng-controller="customersCtrl">
+   <div ng-repeat = "Teacher in Teachers">
+
+    <div class="col-sm-4 col-md-4">
+    <div class="thumbnail">
+        <!--{% if obj.image %}-->
+         <img ng-src='{{ Teacher.image }}' class='img-responsive center-block' />
+        <!--{% endif %}-->
+      <div class="caption">
+        <h3><a ng-href='/Teachers/{{ Teacher.slug }}'>{{ Teacher.name }}</a></h3>
+      </div>
+    </div>
+  </div>
+
+<!--{% cycle "" "" "</div><hr/><div class='row'>" %}-->
+</div>
+</div>
+{% endverbatim %}
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("/api/Teachers/?format=json")
+    .success(function(response) {
+         $scope.Teachers = response
+     });
+//    $http.get("/api/Teachers/Ji-Xian-Lin/?format=json")
+//    .success(function(response) {
+//
+//         $scope.blog = response;
+//
+//     });
+});
+</script>
+
+{%endblock content %}
