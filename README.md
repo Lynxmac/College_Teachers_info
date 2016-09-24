@@ -27,7 +27,7 @@
 
 git clone git@github.com:Lynxmac/College_Teachers_info.git
 cd College_Teachers_info
-pip install requirements.txt
+pip install -r requirements.txt
 
 ```
 
@@ -1633,7 +1633,7 @@ def List_with_api(request):
 
 ```
 
-在Teachers/urls.py添加urlpattern，注意一定要写在slug匹配pattern前面，不然List-r
+在Teachers/urls.py添加urlpattern，注意一定要写在slug匹配pattern前面，不然
 List_with_api永远不会被匹配到
 ```
 from .views import List_with_api
