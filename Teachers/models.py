@@ -44,13 +44,13 @@ class Teacher(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     
     def __unicode__(self):
-        return self.name	
+        return self.name    
 
     def __str__(self):
         return self.name
     
     def get_views_url(self):
-	return reverse("Teachers:detail",kwargs={"slug":self.slug})
+        return reverse("Teachers:detail",kwargs={"slug":self.slug})
 
     class Meta:
         ordering = ["-timestamp", "-updated"]

@@ -28,7 +28,7 @@ class PostForm(forms.ModelForm):
             "research",
             "hold_project",
             "papers",           
-	        "books",
+            "books",
             "conference_papers",
             "recruitment",
         ]
