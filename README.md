@@ -1730,7 +1730,7 @@ app.controller('customersCtrl', function($scope, $http) {
 
 #### 感谢你能看完这篇又臭又长的教程，希望你能学到有用东西，如果有什么问题可以在项目下开一个issue，我们讨论一下，当然你也可以直接发邮箱给我
 
-#### clynxmac#yahoo.com
+#### clynxmac#gmail.com
 
 
 
